@@ -1,23 +1,25 @@
 namespace linterTest {
 
-  interface info {
-    text:string, 
-    key: key
+  interface Info {
+    text: string,
+    key: KEY
   }
-  enum key {
-    Pos = 1, neg = -1
+  enum KEY {
+    POS = 1, NEG = -1
   }
-
-   let info = { text: "G`udetmvhsgBncd1 ", key: key.Pos };
+  
+  
+  const info: Info = { text: "G`udetmvhsgBncd1 ", key: KEY.POS };
   console.log(DeCrypt(info.text, info.key));
+  
+  
+  
 
- 
-
-  function DeCrypt(text: string, _Key: number) {
+  function DeCrypt(_text: string, _Key: number) {
     let result: string = "";
-    for (let i = 0; i < text.length; i ++)
-      result += String.fromCharCode(text.charCodeAt(i) + _Key);
-    
+    for (let i = 0; i < _text.length; i++)
+      result += String.fromCharCode(_text.charCodeAt(i) + _Key);
+
     return result;
     //text length isnt rigth!
   }

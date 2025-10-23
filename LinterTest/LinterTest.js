@@ -1,12 +1,12 @@
 "use strict";
 var linterTest;
 (function (linterTest) {
-    let key;
-    (function (key) {
-        key[key["Pos"] = 1] = "Pos";
-        key[key["neg"] = -1] = "neg";
-    })(key || (key = {}));
-    let info = { text: "G`udetmvhsgBncd1 ", key: key.Pos };
+    let KEY;
+    (function (KEY) {
+        KEY[KEY["POS"] = 1] = "POS";
+        KEY[KEY["NEG"] = -1] = "NEG";
+    })(KEY || (KEY = {}));
+    const info = { text: "G`udetmvhsgBncd1 ", key: KEY.POS };
     console.log(DeCrypt(info.text, info.key));
     function DeCrypt(text, _Key) {
         let result = "";
