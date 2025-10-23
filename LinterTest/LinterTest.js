@@ -6,14 +6,14 @@ var linterTest;
         key[key["Pos"] = 1] = "Pos";
         key[key["neg"] = -1] = "neg";
     })(key || (key = {}));
+    let info = { text: "G`udetmvhsgBncd1 ", key: key.Pos };
+    console.log(DeCrypt(info.text, info.key));
     function DeCrypt(text, _Key) {
         let result = "";
         for (let i = 0; i < text.length; i++)
-            ;
-        result += String.fromCharCode(text.charCodeAt(text.length) + _Key);
+            result += String.fromCharCode(text.charCodeAt(i) + _Key);
         return result;
+        //text length isnt rigth!
     }
-    let info = { text: "G`udetmvhsgBncd1 ", key: key.Pos };
-    console.log(DeCrypt(info.text, info.key));
 })(linterTest || (linterTest = {}));
 //# sourceMappingURL=LinterTest.js.map
