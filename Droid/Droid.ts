@@ -1,6 +1,6 @@
 export namespace Droid {
 
-    type Vektor = {
+    type Vector3 = {
         x: number,
         y: number,
         z: number,
