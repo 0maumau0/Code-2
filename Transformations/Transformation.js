@@ -1,7 +1,7 @@
 "use strict";
 var Transformations;
 (function (Transformations) {
-    const colors = ["lightyellow", "green", "red", "blue"];
+    const colors = ["lightyellow", "violet", "green", "red", "blue"];
     window.addEventListener("load", hndlLoad);
     function hndlLoad() {
         const canvas = document.querySelector("canvas");
@@ -13,16 +13,16 @@ var Transformations;
         drawCoordinateSystem(crc2, colors[1]);
         crc2.save();
         crc2.rotate((60 * Math.PI) / 180);
-        drawCoordinateSystem(crc2, colors[4]);
-        // crc2.restore();
+        drawCoordinateSystem(crc2, colors[2]);
+        //  crc2.restore();
         crc2.save();
         crc2.scale(3, 1.7);
         drawCoordinateSystem(crc2, colors[3]);
-        // crc2.restore();
+        //  crc2.restore();
         crc2.save();
         crc2.translate(70, -100);
-        drawCoordinateSystem(crc2, colors[2]);
-        // crc2.restore();
+        drawCoordinateSystem(crc2, colors[4]);
+        //  crc2.restore();
     }
     function drawCoordinateSystem(_crc2, _color) {
         _crc2.beginPath();

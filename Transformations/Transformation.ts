@@ -3,7 +3,7 @@ namespace Transformations {
 
     type Vector2 = { x: number, y: number };
 
-     const colors:string [] = ["lightyellow","green", "red","blue"]
+     const colors:string [] = ["lightyellow","violet","green", "red","blue"]
 
 
     window.addEventListener("load", hndlLoad)
@@ -20,23 +20,24 @@ namespace Transformations {
         crc2.fillStyle = colors[0]
         crc2.fillRect(0, 0, canvas.height, canvas.width);
 
+        
         drawCoordinateSystem(crc2,colors[1]);
        
 
         crc2.save();
         crc2.rotate((60*Math.PI)/180);
-        drawCoordinateSystem(crc2,colors[4]);
-        // crc2.restore();
+        drawCoordinateSystem(crc2,colors[2]);
+        //  crc2.restore();
 
         crc2.save();
         crc2.scale(3,1.7);
         drawCoordinateSystem(crc2,colors[3]);
-        // crc2.restore();
+        //  crc2.restore();
 
         crc2.save();
         crc2.translate(70, -100);
-        drawCoordinateSystem(crc2,colors[2]);
-        // crc2.restore();
+        drawCoordinateSystem(crc2,colors[4]);
+        //  crc2.restore();
         
     }
 
