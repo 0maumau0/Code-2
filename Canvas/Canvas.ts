@@ -8,7 +8,7 @@ namespace Canvas {
             y: number,
     }
 
-    type triangle = {
+    type Triangle = {
         point1: Vector2,
         point2: Vector2,
         point4: Vector2,
@@ -16,7 +16,7 @@ namespace Canvas {
         fillcolor: string,
     }
     
-    let colorLetters:string[]= ["a","b","c","d","e","f","1","2","3","4","5","6","7","8","9"]
+    const colorLetters:string[]= ["a","b","c","d","e","f","1","2","3","4","5","6","7","8","9"]
     let colorCode:string
     //misssion draw triangle 
     function hndlload(): void {
@@ -37,9 +37,9 @@ namespace Canvas {
 
         for (let i:number = 0; i < 30 ; i++) {
 
-        let point1: Vector2 = { x: Math.floor(Math.random()* canvas.width), y: Math.floor(Math.random()*canvas.height) };
-        let point2: Vector2 = { x: Math.floor(Math.random()* canvas.width), y: Math.floor(Math.random()*canvas.height) };
-        let point3: Vector2 = { x: Math.floor(Math.random()* canvas.width), y: Math.floor(Math.random()*canvas.height) };
+        const point1: Vector2 = { x: Math.floor(Math.random()* canvas.width), y: Math.floor(Math.random()*canvas.height) };
+        const point2: Vector2 = { x: Math.floor(Math.random()* canvas.width), y: Math.floor(Math.random()*canvas.height) };
+        const point3: Vector2 = { x: Math.floor(Math.random()* canvas.width), y: Math.floor(Math.random()*canvas.height) };
         
 
 
@@ -66,7 +66,7 @@ namespace Canvas {
     // triangle.lineTo(170, 10)
     // triangle.closePath();
     // crc2.stroke(triangle);
-    function randomColorCode(_colorCode:string):string{
+    function randomColorCode():string{
 
         colorCode = "#"
 
@@ -84,9 +84,9 @@ namespace Canvas {
         _crc2.moveTo(_point1.x, _point1.y);
         _crc2.lineTo(_point2.x,_point2.y);
         _crc2.lineTo(_point3.x,_point3.y);
-        randomColorCode(colorCode);
+        randomColorCode();
         _crc2.fillStyle = colorCode;
-        randomColorCode(colorCode);
+        randomColorCode();
         _crc2.strokeStyle = colorCode;
         _crc2.fill();
         _crc2.closePath();
