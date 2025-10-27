@@ -7,11 +7,11 @@ type Vector2 ={
     y:number
 }
 
-const trianglePieces:number = 50;
+const pieces:number = 10;
 const radius:number = 30;
-const central: Vector2 ={x:100,y:100};
-const rotationAngle:number = 2*Math.PI / trianglePieces;
-const angle:number = 0;
+const centralPoint: Vector2 ={x:300,y:300};
+
+
 
 function hndlLoad():void {
     const canvas: HTMLCanvasElement = document.querySelector("canvas")!;
@@ -20,15 +20,25 @@ function hndlLoad():void {
     canvas.width = window.innerWidth;
     crc2.fillStyle = "blue"
     crc2.fillRect(0,0,window.innerWidth,window.innerHeight)
-    trianglePie(trianglePieces);
-}
-
-function trianglePie(_trianglePieces:number):void{
-
-    for ( let i :number =0; i < trianglePieces; i++  )
-
+    drawtrianglePie(crc2,pieces);
 
 }
+
+function drawtrianglePie(_crc2:CanvasRenderingContext2D,_pieces:number):void{
+
+    const rotationAngle:number = (2*Math.PI) / _pieces;
+
+    for ( let i :number =0; i < _pieces; i++  ){
+
+       
+
+
+    }
+
+
+
+}
+// christians code and finishe circle of triangles
 
 
 }
