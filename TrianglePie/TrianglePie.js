@@ -2,8 +2,8 @@
 var TrianglePie;
 (function (TrianglePie) {
     window.addEventListener("load", hndlLoad);
-    const pieces = 10;
-    const radius = 150;
+    const pieces = Number(prompt("how much pieces"));
+    const radius = Number(prompt("which radius"));
     const centralPoint = { x: 300, y: 300 };
     const point2 = { x: 0, y: 0 };
     const point3 = { x: 0, y: 0 };

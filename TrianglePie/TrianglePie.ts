@@ -7,8 +7,9 @@ namespace TrianglePie {
         y: number
     }
 
-    const pieces: number = 10;
-    const radius: number = 150;
+
+    const pieces:number = Number(prompt("how much pieces"));
+    const radius: number = Number(prompt("which radius"));
     const centralPoint: Vector2 = { x: 300, y: 300 };
     const point2: Vector2 = {x:0,y:0};
     const point3: Vector2 = {x:0,y:0};
