@@ -1,5 +1,7 @@
 namespace TrianglePie {
 
+    // very close on chriss code but i understand it :D
+
     window.addEventListener("load", hndlLoad);
 
     type Vector2 = {

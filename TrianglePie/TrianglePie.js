@@ -1,6 +1,7 @@
 "use strict";
 var TrianglePie;
 (function (TrianglePie) {
+    // very close on chriss code but i understand it :D
     window.addEventListener("load", hndlLoad);
     const pieces = Number(prompt("how much pieces"));
     const radius = Number(prompt("which radius"));
