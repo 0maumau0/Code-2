@@ -9,8 +9,7 @@ namespace HayDay {
 
 
 
-        constructor(_name: string, _species: SPECIES, _food: Silo,
-            _consumption: number, _sound: string) {
+        constructor(_name: string, _species: SPECIES, _food: Silo,_consumption: number, _sound: string) {
 
             this.set(_name, _species, _food, _consumption, _sound);
 
