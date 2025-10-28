@@ -17,6 +17,19 @@ var HayDay;
             this.consumption = _d;
             this.sound = _e;
         }
+        eat() {
+            console.log(this.name + " " + "eating");
+            this.food.quantity = this.food.quantity - this.consumption;
+            console.log(this.food.quantity + " " + "kg" + " " + this.food.name + " " + "left");
+        }
+        sing() {
+            const songtext = "Old MacDonald had a farm, Ee-aye, ee-aye, oh And on his farm he had a" + " " + this.name + " " +
+                "Ee-aye, ee-aye, ohWith a" + this.sound + this.sound + "" + "here and a" + " " + this.sound + this.sound + " " +
+                "thereHere a" + " " + this.sound + " " + ", there a" + " " + this.sound + "" + "Everywhere a" + "" + this.sound + this.sound + " " +
+                "Old MacDonald had a farm,Ee-aye, ee-aye, oh.";
+            console.log(this.name);
+            console.log(songtext);
+        }
     }
     HayDay.Animal = Animal;
     let SPECIES;
