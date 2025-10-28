@@ -51,7 +51,7 @@ namespace TrianglePie {
         }
 
         function rotatePoint(_angle: number, _point: Vector2,): Vector2 {
-            let rotated: Vector2 = { x: 0, y: 0 }
+            const rotated: Vector2 = { x: 0, y: 0 };
 
             rotated.x = (Math.cos(_angle) * _point.x) - (Math.sin(_angle) * _point.y);
             rotated.y = (Math.sin(_angle) * _point.x) + (Math.cos(_angle) * _point.y);
