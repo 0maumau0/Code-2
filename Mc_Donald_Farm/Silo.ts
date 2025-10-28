@@ -8,7 +8,7 @@ namespace HayDay{
 
 
 
-        constructor(_a:string,_b:number,_c:number,_d:number){
+        constructor(_name:string,_quantity:number,_capacity:number,_demand:number){
             
 
             this.set(_a,_b,_c,_d);

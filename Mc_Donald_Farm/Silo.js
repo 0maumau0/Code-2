@@ -6,7 +6,7 @@ var HayDay;
         quantity;
         capacity;
         demand;
-        constructor(_a, _b, _c, _d) {
+        constructor(_name, _quantity, _capacity, _demand) {
             this.set(_a, _b, _c, _d);
         }
         set(_a, _b, _c, _d) {

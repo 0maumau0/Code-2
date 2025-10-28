@@ -21,10 +21,11 @@ var HayDay;
     HayDay.Animal = Animal;
     let SPECIES;
     (function (SPECIES) {
-        SPECIES[SPECIES["DOG"] = 0] = "DOG";
+        SPECIES[SPECIES["COW"] = 0] = "COW";
         SPECIES[SPECIES["CHICKEN"] = 1] = "CHICKEN";
         SPECIES[SPECIES["DONKEY"] = 2] = "DONKEY";
         SPECIES[SPECIES["PIG"] = 3] = "PIG";
+        SPECIES[SPECIES["CAT"] = 4] = "CAT";
     })(SPECIES || (SPECIES = {}));
 })(HayDay || (HayDay = {}));
 //# sourceMappingURL=Animal.js.map

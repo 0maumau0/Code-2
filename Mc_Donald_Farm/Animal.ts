@@ -28,9 +28,10 @@ namespace HayDay {
 
 
     enum SPECIES {
-        DOG,
+        COW,
        CHICKEN,
        DONKEY,
        PIG,
+       CAT,
     }
 }
