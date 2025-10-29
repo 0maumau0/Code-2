@@ -1,6 +1,5 @@
 namespace Asteroids {
-
-    export let asteroidPaths: Path2D[];
+export let asteroidPaths: Path2D[];
     export let ufoPath: Path2D;
 
     export const shapesAsteroids: number[][][] = [
@@ -19,25 +18,25 @@ namespace Asteroids {
     ];
 
     export function createPaths(): void {
-        asteroidPaths = createAsteroidsPaths(shapesAsteroids);
+        asteroidPaths = createAsteroidPaths(shapesAsteroids);
         ufoPath = createUfoPath();
     }
 
-    function createAsteroidsPaths(_shapes: number[][][]): Path2D[] {
+    function createAsteroidPaths(_shapes: number[][][]): Path2D[] {
         const paths: Path2D[] = [];
         for (const type of _shapes) {
             const path: Path2D = new Path2D();
             let first: boolean = true;
-            //console.group(type);
+            // console.group(type);
             for (const coordinates of type) {
-                //console.log(coordinates);
+                // console.log(coordinates);
                 if (first)
                     path.moveTo(coordinates[0], coordinates[1]);
                 else
                     path.lineTo(coordinates[0], coordinates[1]);
                 first = false;
             }
-
+            // console.groupEnd();
             path.closePath();
             paths.push(path);
         }
@@ -63,6 +62,7 @@ namespace Asteroids {
         path.closePath();
         return path;
     }
+   
 
 
 }

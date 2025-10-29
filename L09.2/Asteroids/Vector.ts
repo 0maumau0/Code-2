@@ -1,28 +1,36 @@
-namespace Asteroids{
+namespace Asteroids {
 
-export class Vector {
-        x:number =0 ;
-        y:number= 0 ;
+    export class Vector {
+        public x: number = 0;
+        public y: number = 0;
 
-        constructor(_x:number,_y:number) {
-            this.set(_x,_y);
+        public constructor(_x: number, _y: number) {
+            this.set(_x, _y);
 
 
         }
 
-        set(_x:number, _y:number):void{
+        public set(_x: number, _y: number): void {
             this.x = _x;
             this.y = _y;
         }
 
-        scale(_factor:number):void{
+        public scale(_factor: number): void {
             this.x *= _factor;
-            this.y *= _factor; 
+            this.y *= _factor;
         }
 
-        add(_addend:Vector):void{
+        public add(_addend: Vector): void {
             this.x += _addend.x;
             this.y += _addend.y;
+        }
+
+        public random(_minLength: number, _maxLength: number): void {
+            const length: number = _minLength + Math.random() * (_maxLength - _minLength);
+            const direction: number = Math.random() * 2 * Math.PI;
+
+            this.set(Math.cos(direction), Math.sin(direction));
+            this.scale(length)
         }
     }
 

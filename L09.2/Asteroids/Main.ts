@@ -13,8 +13,10 @@ namespace Asteroids {
         crc2.strokeStyle = "white";
 
         createPaths();
-        console.log("Asteroids paths",asteroidPaths);
+        console.log("Asteroids paths", asteroidPaths);
 
+        const pinky: Asteroid = new Asteroid(1);
+        console.log(pinky);
 
 
 
