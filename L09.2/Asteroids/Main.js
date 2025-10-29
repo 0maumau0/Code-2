@@ -8,12 +8,18 @@ var Asteroids;
         if (!canvas)
             return;
         Asteroids.crc2 = canvas.getContext("2d");
+        Asteroids.crc2.fillRect(0, 0, canvas.width, canvas.height);
         Asteroids.crc2.fillStyle = "black";
         Asteroids.crc2.strokeStyle = "white";
         Asteroids.createPaths();
         console.log("Asteroids paths", Asteroids.asteroidPaths);
         const pinky = new Asteroids.Asteroid(1);
         console.log(pinky);
+        for (let i = 0; i < 50; i++) {
+            pinky.draw();
+            pinky.move(0.1);
+        }
+        ;
     }
 })(Asteroids || (Asteroids = {}));
 //# sourceMappingURL=Main.js.map
