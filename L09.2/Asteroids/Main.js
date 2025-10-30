@@ -62,7 +62,7 @@ var Asteroids;
         Asteroids.crc2.fillRect(0, 0, Asteroids.crc2.canvas.width, Asteroids.crc2.canvas.height);
         for (let asteroid of asteroids) {
             asteroid.move(1 / 50);
-            asteroid.draw();
+            asteroid.draw(asteroid);
         }
         //ship.draw();
         //hndlCollisions();

@@ -25,6 +25,11 @@ namespace Asteroids {
             this.y += _addend.y;
         }
 
+        public copy(_vector:Vector):Vector{
+            const dupVector: Vector = new Vector(_vector.x,_vector.y)
+            return dupVector;
+        }
+
         public random(_minLength: number, _maxLength: number): void {
             const length: number = _minLength + Math.random() * (_maxLength - _minLength);
             const direction: number = Math.random() * 2 * Math.PI;

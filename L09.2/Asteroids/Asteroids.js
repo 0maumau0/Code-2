@@ -9,7 +9,9 @@ var Asteroids;
         constructor(_size, _position) {
             // console.log("constructor");
             if (_position) {
-                this.position = _position;
+                // const newPosition:Vector = new Vector (_position.x,_position.y)
+                // newPosition
+                this.position = _position.copy(_position);
             }
             else
                 this.position = new Asteroids.Vector(0, 0);
@@ -38,12 +40,13 @@ var Asteroids;
             }
         }
         ;
-        draw() {
+        draw(_asteroid) {
             // console.log("draw");
             Asteroids.crc2.save();
             Asteroids.crc2.translate(this.position.x, this.position.y);
             Asteroids.crc2.scale(this.size, this.size);
             Asteroids.crc2.translate(-50, -50);
+            Asteroids.crc2.lineWidth = 1 / _asteroid.size;
             Asteroids.crc2.stroke(Asteroids.asteroidPaths[this.type]);
             Asteroids.crc2.restore();
         }

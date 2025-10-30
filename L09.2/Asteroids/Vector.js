@@ -19,6 +19,10 @@ var Asteroids;
             this.x += _addend.x;
             this.y += _addend.y;
         }
+        copy(_vector) {
+            const dupVector = new Vector(_vector.x, _vector.y);
+            return dupVector;
+        }
         random(_minLength, _maxLength) {
             const length = _minLength + Math.random() * (_maxLength - _minLength);
             const direction = Math.random() * 2 * Math.PI;
