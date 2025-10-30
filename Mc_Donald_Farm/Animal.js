@@ -8,14 +8,11 @@ var HayDay;
         consumption;
         sound;
         constructor(_name, _species, _food, _consumption, _sound) {
-            this.set(_name, _species, _food, _consumption, _sound);
-        }
-        set(_a, _b, _c, _d, _e) {
-            this.name = _a;
-            this.species = _b;
-            this.food = _c;
-            this.consumption = _d;
-            this.sound = _e;
+            this.name = _name;
+            this.species = _species;
+            this.food = _food;
+            this.consumption = _consumption;
+            this.sound = _sound;
         }
         eat() {
             console.log(this.name + " " + "eating");
@@ -30,6 +27,8 @@ var HayDay;
             console.log(this.name);
             console.log(songtext);
         }
+        doSpecialAction() {
+        }
     }
     HayDay.Animal = Animal;
     let SPECIES;
@@ -39,6 +38,6 @@ var HayDay;
         SPECIES[SPECIES["DONKEY"] = 2] = "DONKEY";
         SPECIES[SPECIES["PIG"] = 3] = "PIG";
         SPECIES[SPECIES["CAT"] = 4] = "CAT";
-    })(SPECIES || (SPECIES = {}));
+    })(SPECIES = HayDay.SPECIES || (HayDay.SPECIES = {}));
 })(HayDay || (HayDay = {}));
 //# sourceMappingURL=Animal.js.map

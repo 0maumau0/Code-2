@@ -1,21 +1,21 @@
 namespace HayDay{
 
    export class Silo {
-        name:string;
-        quantity:number;
-        capacity:number;
-        demand:number;
+       public name:string = "";
+       public quantity:number= 0;
+       public capacity:number = 0;
+       public demand:number= 0;
 
 
 
-        constructor(_name:string,_quantity:number,_capacity:number,_demand:number){
+        public constructor(_name:string,_quantity:number,_capacity:number,_demand:number){
             
 
             this.set(_name,_quantity,_capacity,_demand);
 
         }
        
-        set(_a:string,_b:number,_c:number,_d:number): void {
+        public set(_a:string,_b:number,_c:number,_d:number): void {
             this.name = _a;
             this.quantity = _b;
             this.capacity=_c;
@@ -24,7 +24,7 @@ namespace HayDay{
 
         }
 
-        restock():void{
+        public restock():void{
 
             let supply:number = 0;
            

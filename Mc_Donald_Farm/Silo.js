@@ -2,10 +2,10 @@
 var HayDay;
 (function (HayDay) {
     class Silo {
-        name;
-        quantity;
-        capacity;
-        demand;
+        name = "";
+        quantity = 0;
+        capacity = 0;
+        demand = 0;
         constructor(_name, _quantity, _capacity, _demand) {
             this.set(_name, _quantity, _capacity, _demand);
         }

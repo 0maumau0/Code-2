@@ -3,7 +3,7 @@ namespace Asteroids {
     export let crc2: CanvasRenderingContext2D;
 
 
-    let asteroids: Asteroid[] = [];
+    const asteroids: Asteroid[] = [];
 
     function hndLoad(_event: Event): void {
 
@@ -34,7 +34,7 @@ namespace Asteroids {
     function shootLaser(_event:MouseEvent):void{
         console.log("shoot Laser");
         const hotspot : Vector = new Vector(_event.offsetX, _event.offsetY);
-        let asteroidHit: Asteroid | null = getAsteroidHit(hotspot);
+        const asteroidHit: Asteroid | null = getAsteroidHit(hotspot);
         console.log(asteroidHit);
         
         if (asteroidHit){
@@ -45,7 +45,7 @@ namespace Asteroids {
 
     function getAsteroidHit(_hotspot:Vector):Asteroid | null{
 
-        for (let asteroid of asteroids){
+        for (const asteroid of asteroids){
            if (asteroid.checkHit(_hotspot)){
             return asteroid;
 
@@ -82,7 +82,7 @@ namespace Asteroids {
         console.log("update");
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height)
 
-        for (let asteroid of asteroids) {
+        for (const asteroid of asteroids) {
             asteroid.move(1 / 50);
             asteroid.draw(asteroid);
         }
