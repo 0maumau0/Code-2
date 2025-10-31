@@ -3,6 +3,7 @@ var Asteroids;
 (function (Asteroids) {
     window.addEventListener("load", hndLoad);
     const asteroids = [];
+    let projektile;
     function hndLoad(_event) {
         console.log("Asteroids starting");
         const canvas = document.querySelector("canvas");
@@ -16,11 +17,17 @@ var Asteroids;
         console.log("Asteroids paths", Asteroids.asteroidPaths);
         createAsteroids(5);
         //createShip();
-        // canvas.addEventListener("mousedown",loadLaser);
+        canvas.addEventListener("mousedown", loadLaser);
         canvas.addEventListener("mouseup", shootLaser);
         // canvas.addEventListener("keypress",hndlKeypress);
         // canvas.addEventListener("mousemove",sendShip);
         window.setInterval(update, 20);
+    }
+    function loadLaser(_event) {
+        const origin = new Asteroids.Vector(_event.offsetX, _event.offsetY);
+        const velocity = new Asteroids.Vector(0, 0);
+        velocity.random(100, 100);
+        projektile = new Asteroids.Projektile(origin, velocity);
     }
     function shootLaser(_event) {
         console.log("shoot Laser");
@@ -64,6 +71,8 @@ var Asteroids;
             asteroid.move(1 / 50);
             asteroid.draw();
         }
+        projektile.move(1 / 50);
+        projektile.draw();
         //ship.draw();
         //hndlCollisions();
     }

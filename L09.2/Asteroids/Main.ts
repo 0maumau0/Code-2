@@ -4,6 +4,7 @@ namespace Asteroids {
 
 
     const asteroids: Asteroid[] = [];
+    let projektile:Projektile;
 
     function hndLoad(_event: Event): void {
 
@@ -23,12 +24,22 @@ namespace Asteroids {
         createAsteroids(5);
         //createShip();
 
-        // canvas.addEventListener("mousedown",loadLaser);
+         canvas.addEventListener("mousedown",loadLaser);
          canvas.addEventListener("mouseup", shootLaser);
         // canvas.addEventListener("keypress",hndlKeypress);
         // canvas.addEventListener("mousemove",sendShip);
 
         window.setInterval(update, 20);
+    }
+
+    function loadLaser(_event:MouseEvent):void{
+        const origin :Vector = new Vector(_event.offsetX, _event.offsetY);
+        const velocity:Vector = new Vector (0,0);
+        velocity.random(100,100);
+        projektile = new Projektile(origin,velocity);
+    
+
+
     }
 
     function shootLaser(_event:MouseEvent):void{
@@ -86,6 +97,9 @@ namespace Asteroids {
             asteroid.move(1 / 50);
             asteroid.draw();
         }
+
+        projektile.move(1/50);
+        projektile.draw();
 
         //ship.draw();
         //hndlCollisions();
