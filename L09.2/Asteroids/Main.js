@@ -2,8 +2,7 @@
 var Asteroids;
 (function (Asteroids) {
     window.addEventListener("load", hndLoad);
-    const asteroids = [];
-    let projectile;
+    const moveables = [];
     function hndLoad(_event) {
         console.log("Asteroids starting");
         const canvas = document.querySelector("canvas");
@@ -27,7 +26,8 @@ var Asteroids;
         const origin = new Asteroids.Vector(_event.offsetX, _event.offsetY);
         const velocity = new Asteroids.Vector(0, 0);
         velocity.random(100, 100);
-        projectile = new Asteroids.Projectile(origin, velocity);
+        const projectile = new Asteroids.Projectile(origin, velocity);
+        moveables.push(projectile);
     }
     function shootLaser(_event) {
         console.log("shoot Laser");
@@ -39,9 +39,9 @@ var Asteroids;
         }
     }
     function getAsteroidHit(_hotspot) {
-        for (const asteroid of asteroids) {
-            if (asteroid.checkHit(_hotspot)) {
-                return asteroid;
+        for (const moveable of moveables) {
+            if (moveable instanceof Asteroids.Asteroid && moveable.checkHit(_hotspot)) {
+                return moveable;
             }
         }
         return null;
@@ -51,30 +51,35 @@ var Asteroids;
             for (let i = 0; i < 2; i++) {
                 const fragment = new Asteroids.Asteroid(_asteroid.size / 2, _asteroid.position);
                 fragment.velocity.add(_asteroid.velocity);
-                asteroids.push(fragment);
+                moveables.push(fragment);
             }
         }
-        const index = asteroids.indexOf(_asteroid);
-        asteroids.splice(index, 1);
+        _asteroid.expandable = true;
     }
     function createAsteroids(_numberAsteroids) {
         console.log("create asteroids");
         for (let i = 0; i < _numberAsteroids; i++) {
             const asteroid = new Asteroids.Asteroid(1.0);
-            asteroids.push(asteroid);
+            moveables.push(asteroid);
         }
     }
     function update() {
         console.log("update");
         Asteroids.crc2.fillRect(0, 0, Asteroids.crc2.canvas.width, Asteroids.crc2.canvas.height);
-        for (const asteroid of asteroids) {
-            asteroid.move(1 / 50);
-            asteroid.draw();
+        for (const moveable of moveables) {
+            moveable.move(1 / 50);
+            moveable.draw();
         }
-        projectile.move(1 / 50);
-        projectile.draw();
+        deleteExpandables();
         //ship.draw();
         //hndlCollisions();
+    }
+    function deleteExpandables() {
+        for (let i = moveables.length - 1; i >= 0; i--) {
+            if (moveables[i].expandable) {
+                moveables.splice(i, 1);
+            }
+        }
     }
 })(Asteroids || (Asteroids = {}));
 //# sourceMappingURL=Main.js.map

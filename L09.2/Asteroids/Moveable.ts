@@ -4,6 +4,7 @@ namespace Asteroids {
     export class Moveable {
         public position: Vector;
         public velocity: Vector;
+        public expandable: boolean = false;
     
         public constructor( _position?: Vector) {
             // console.log("constructor Moveable");

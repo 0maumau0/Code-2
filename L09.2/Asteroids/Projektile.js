@@ -2,10 +2,10 @@
 var Asteroids;
 (function (Asteroids) {
     class Projectile extends Asteroids.Moveable {
-        lifetime = 2;
+        lifetime = 5;
         constructor(_position, _velocity) {
             // console.log("constructor");
-            super();
+            super(_position);
             this.velocity = _velocity.copy();
         }
         ;
@@ -21,7 +21,7 @@ var Asteroids;
             super.move(_timeslice);
             this.lifetime -= _timeslice;
             if (this.lifetime < 0) {
-                this.velocity = new Asteroids.Vector(0, 0);
+                this.expandable = true;
             }
         }
     }
