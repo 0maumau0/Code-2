@@ -1,7 +1,7 @@
 "use strict";
 var Asteroids;
 (function (Asteroids) {
-    class Projektile extends Asteroids.Moveable {
+    class Projectile extends Asteroids.Moveable {
         lifetime = 2;
         constructor(_position, _velocity) {
             // console.log("constructor");
@@ -25,6 +25,6 @@ var Asteroids;
             }
         }
     }
-    Asteroids.Projektile = Projektile;
+    Asteroids.Projectile = Projectile;
 })(Asteroids || (Asteroids = {}));
 //# sourceMappingURL=Projektile.js.map

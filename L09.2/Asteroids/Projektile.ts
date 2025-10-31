@@ -1,7 +1,7 @@
 namespace Asteroids {
 
 
-    export class Projektile extends Moveable {
+    export class Projectile extends Moveable {
         public lifetime: number = 2;
 
 

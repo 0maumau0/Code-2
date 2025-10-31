@@ -4,11 +4,13 @@ namespace Asteroids {
 
 
     const asteroids: Asteroid[] = [];
-    let projektile:Projektile;
+    let projectile:Projectile;
+    
 
     function hndLoad(_event: Event): void {
 
         console.log("Asteroids starting");
+        
         const canvas: HTMLCanvasElement | null = document.querySelector("canvas");
         if (!canvas)
             return;
@@ -36,7 +38,7 @@ namespace Asteroids {
         const origin :Vector = new Vector(_event.offsetX, _event.offsetY);
         const velocity:Vector = new Vector (0,0);
         velocity.random(100,100);
-        projektile = new Projektile(origin,velocity);
+        projectile = new Projectile(origin,velocity);
     
 
 
@@ -98,8 +100,8 @@ namespace Asteroids {
             asteroid.draw();
         }
 
-        projektile.move(1/50);
-        projektile.draw();
+        projectile.move(1/50);
+        projectile.draw();
 
         //ship.draw();
         //hndlCollisions();
