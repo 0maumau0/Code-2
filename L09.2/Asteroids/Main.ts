@@ -84,7 +84,7 @@ namespace Asteroids {
 
         for (const asteroid of asteroids) {
             asteroid.move(1 / 50);
-            asteroid.draw(asteroid);
+            asteroid.draw();
         }
 
         //ship.draw();

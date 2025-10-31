@@ -25,8 +25,8 @@ namespace Asteroids {
             this.y += _addend.y;
         }
 
-        public copy(_vector:Vector):Vector{
-            const dupVector: Vector = new Vector(_vector.x,_vector.y)
+        public copy():Vector{
+            const dupVector: Vector = new Vector(this.x,this.y);
             return dupVector;
         }
 

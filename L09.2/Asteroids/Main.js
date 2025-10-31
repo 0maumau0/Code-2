@@ -2,7 +2,7 @@
 var Asteroids;
 (function (Asteroids) {
     window.addEventListener("load", hndLoad);
-    let asteroids = [];
+    const asteroids = [];
     function hndLoad(_event) {
         console.log("Asteroids starting");
         const canvas = document.querySelector("canvas");
@@ -25,14 +25,14 @@ var Asteroids;
     function shootLaser(_event) {
         console.log("shoot Laser");
         const hotspot = new Asteroids.Vector(_event.offsetX, _event.offsetY);
-        let asteroidHit = getAsteroidHit(hotspot);
+        const asteroidHit = getAsteroidHit(hotspot);
         console.log(asteroidHit);
         if (asteroidHit) {
             breakAsteroid(asteroidHit);
         }
     }
     function getAsteroidHit(_hotspot) {
-        for (let asteroid of asteroids) {
+        for (const asteroid of asteroids) {
             if (asteroid.checkHit(_hotspot)) {
                 return asteroid;
             }
@@ -60,9 +60,9 @@ var Asteroids;
     function update() {
         console.log("update");
         Asteroids.crc2.fillRect(0, 0, Asteroids.crc2.canvas.width, Asteroids.crc2.canvas.height);
-        for (let asteroid of asteroids) {
+        for (const asteroid of asteroids) {
             asteroid.move(1 / 50);
-            asteroid.draw(asteroid);
+            asteroid.draw();
         }
         //ship.draw();
         //hndlCollisions();

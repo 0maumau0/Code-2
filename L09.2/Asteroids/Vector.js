@@ -19,8 +19,8 @@ var Asteroids;
             this.x += _addend.x;
             this.y += _addend.y;
         }
-        copy(_vector) {
-            const dupVector = new Vector(_vector.x, _vector.y);
+        copy() {
+            const dupVector = new Vector(this.x, this.y);
             return dupVector;
         }
         random(_minLength, _maxLength) {

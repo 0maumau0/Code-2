@@ -1,14 +1,14 @@
 "use strict";
 var Asteroids;
 (function (Asteroids) {
-    class Asteroid extends Asteroids.Moveable {
-        position;
-        velocity;
-        type = 0;
-        size = 0;
-        constructor(_size, _position) {
-            super(_position);
+    class Projektile extends Asteroids.Moveable {
+        lifetime;
+        constructor(_position, _velocity) {
+            // console.log("constructor");
+            super();
             if (_position) {
+                // const newPosition:Vector = new Vector (_position.x,_position.y)
+                // newPosition
                 this.position = _position.copy();
             }
             else
@@ -36,6 +36,6 @@ var Asteroids;
             return (Math.abs(difference.x) < hitsize && Math.abs(difference.y) < hitsize);
         }
     }
-    Asteroids.Asteroid = Asteroid;
+    Asteroids.Projektile = Projektile;
 })(Asteroids || (Asteroids = {}));
-//# sourceMappingURL=Asteroids.js.map
+//# sourceMappingURL=Projektile.js.map
