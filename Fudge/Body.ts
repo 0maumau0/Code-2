@@ -11,7 +11,7 @@ namespace Fudge {
             this.addComponent(new f.ComponentMaterial(material));
             this.addComponent(new f.ComponentTransform());
 
-            this.mtxLocal.translateX(1)
+            this.mtxLocal.translateX(2)
 
         }
 

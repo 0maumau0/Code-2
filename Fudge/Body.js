@@ -8,7 +8,7 @@ var Fudge;
             this.addComponent(new f.ComponentMesh(Fudge.mesh));
             this.addComponent(new f.ComponentMaterial(Fudge.material));
             this.addComponent(new f.ComponentTransform());
-            this.mtxLocal.translateX(1);
+            this.mtxLocal.translateX(2);
         }
         update() {
             const rotationSpeed = 360 / 5;

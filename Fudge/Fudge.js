@@ -5,8 +5,8 @@ var Fudge;
     window.addEventListener("load", hndlLoad);
     var f = FudgeCore;
     Fudge.mesh = new f.MeshCube("mesh");
-    const earth = new Fudge.Body("earth");
     Fudge.material = new f.Material("material", f.ShaderLitTextured);
+    const earth = new Fudge.Body("earth");
     const cmpCamera = new f.ComponentCamera();
     const viewport = new f.Viewport();
     function hndlLoad() {
