@@ -3,8 +3,8 @@ namespace Fudge {
     window.addEventListener("load", hndlLoad);
     import f = FudgeCore;
     export const mesh: f.Mesh = new f.MeshCube("mesh");
+    export const material: f.Material = new f.Material("material", f.ShaderLit);
     const earth: Body = new Body("earth")
-    export const material: f.Material = new f.Material("material", f.ShaderLitTextured);
     const cmpCamera: f.ComponentCamera = new f.ComponentCamera();
     const viewport: f.Viewport = new f.Viewport();
     
