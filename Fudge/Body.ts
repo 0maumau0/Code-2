@@ -4,28 +4,41 @@ namespace Fudge {
 
     export class Body extends f.Node {
 
-        public constructor(_name: string) {
-            super(_name);
+       public name: string;
+       public distance:number;
+       public rotationspeed:number;
 
-            this.addComponent(new f.ComponentMesh(mesh));
-            this.addComponent(new f.ComponentMaterial(material));
-            this.addComponent(new f.ComponentTransform());
 
-            this.mtxLocal.translateX(2)
+        public constructor(_name: string, _distance: number,_rotationspeed:number) {
+        super(_name);
 
-        }
+        this.addComponent(new f.ComponentMesh(mesh));
+        this.addComponent(new f.ComponentMaterial(material));
+        this.addComponent(new f.ComponentTransform());
+
+        this.name =_name;
+        this.distance = _distance;
+        this.rotationspeed = _rotationspeed
+        
+
+        celestials.push(this)
+
+        this.mtxLocal.translateX(_distance)
+
+     }
 
         public update(): void {
-            const rotationSpeed: number = 360 / 5;
-            const angle: number = rotationSpeed * f.Loop.timeFrameGame / 1000
+        const rotSpeed: number = 360 / this.rotationspeed;
+        const angle: number = rotSpeed * f.Loop.timeFrameGame / 1000
 
-            this.getComponent(f.ComponentTransform).mtxLocal.rotateY(angle);
-            this.getComponent(f.ComponentMesh).mtxPivot.rotateY(angle);
+            this.getComponent(f.ComponentTransform).mtxLocal.rotateY(angle,true);
+        this.getComponent(f.ComponentMesh).mtxPivot.rotateY(angle);
 
-
-        }
 
     }
+
+}
+
 
 
 
