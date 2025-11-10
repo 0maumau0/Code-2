@@ -1,0 +1,90 @@
+"use strict";
+var Script;
+(function (Script) {
+    var f = FudgeCore;
+    f.Project.registerScriptNamespace(Script); // Register the namespace to FUDGE for serialization
+    class CubaControl extends f.ComponentScript {
+        // Register the script as component for use in the editor via drag&drop
+        static { this.iSubclass = f.Component.registerSubclass(CubaControl); }
+        constructor() {
+            super();
+            // Properties may be mutated by users in the editor via the automatically created user interface
+            this.message = "CustomComponentScript added to ";
+            // Activate the functions of this component as response to events
+            this.hndEvent = (_event) => {
+                switch (_event.type) {
+                    case "componentAdd" /* f.EVENT.COMPONENT_ADD */:
+                        f.Debug.log(this.message, this.node);
+                        break;
+                    case "componentRemove" /* f.EVENT.COMPONENT_REMOVE */:
+                        this.removeEventListener("componentAdd" /* f.EVENT.COMPONENT_ADD */, this.hndEvent);
+                        this.removeEventListener("componentRemove" /* f.EVENT.COMPONENT_REMOVE */, this.hndEvent);
+                        break;
+                    case "nodeDeserialized" /* f.EVENT.NODE_DESERIALIZED */:
+                        f.Loop.addEventListener("loopFrame" /* f.EVENT.LOOP_FRAME */, this.update);
+                        break;
+                }
+            };
+            this.update = () => {
+                if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W, f.KEYBOARD_CODE.S]) == true) {
+                    if (f.KEYBOARD_CODE.A) {
+                        this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(-0.2);
+                    }
+                    else
+                        this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(0.2);
+                }
+                // let node:f.Node = this.node;
+                // let cmpTransform:f.ComponentTransform = node.getComponent(f.ComponentTransform);
+                // cmpTransform.mtxLocal.rotateY(mouseX /100);
+            };
+            this.experiment = (_angle) => {
+                console.log("Experiment is a success");
+                this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle);
+            };
+            // Don't start when running in editor
+            if (f.Project.mode == f.MODE.EDITOR)
+                return;
+            // Listen to this component being added to or removed from a node
+            this.addEventListener("componentAdd" /* f.EVENT.COMPONENT_ADD */, this.hndEvent);
+            this.addEventListener("componentRemove" /* f.EVENT.COMPONENT_REMOVE */, this.hndEvent);
+            this.addEventListener("nodeDeserialized" /* f.EVENT.NODE_DESERIALIZED */, this.hndEvent);
+        }
+    }
+    Script.CubaControl = CubaControl;
+    // protected reduceMutator(_mutator: ƒ.Mutator): void {
+    //   // delete properties that should not be mutated
+    //   // undefined properties and private fields (#) will not be included by default
+    // }
+})(Script || (Script = {}));
+var Script;
+(function (Script) {
+    var f = FudgeCore;
+    Script.leftclick = false;
+    // export let mouseX:number = 0;
+    f.Debug.info("Main Program Template running!");
+    let viewport;
+    let cuba;
+    document.addEventListener("interactiveViewportStarted", start);
+    function start(_event) {
+        viewport = _event.detail;
+        cuba = viewport.getBranch().getChildByName("Cuba");
+        console.log(cuba);
+        // cuba.getComponent(CubaControl).experiment();
+        document.addEventListener("mousemove", hndlMovement);
+        f.Loop.addEventListener("loopFrame" /* f.EVENT.LOOP_FRAME */, update);
+        f.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
+    }
+    function update(_event) {
+        // ƒ.Physics.simulate();  // if physics is included and used
+        viewport.draw();
+        f.AudioManager.default.update();
+    }
+    function hndlMovement(_event) {
+        let angle = _event.movementX;
+        cuba.getComponent(Script.CubaControl).experiment(-angle);
+        // mouseX = window.innerWidth/2 - _event.clientX;
+        // mouseX = _event.movementX;
+        // console.log(_event.movementX);
+    }
+})(Script || (Script = {}));
+//# sourceMappingURL=Script.js.map
