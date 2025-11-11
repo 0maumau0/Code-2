@@ -6,7 +6,7 @@ namespace Script {
 
   let viewport: f.Viewport;
   let cuba: f.Node; 
-  // const cubaCars:f.Graph[] = [];
+   const cubaCars:f.Node[] = []; // you can create instead an array out of the CUba graph and his childs
   
   
 
@@ -29,6 +29,7 @@ namespace Script {
 
 
      cuba = viewport.getBranch().getChildByName("Cuba")
+     cubaCars.push(cuba)
      await spawnCars(graphCuba);
     console.log(cuba);
 
@@ -65,7 +66,11 @@ namespace Script {
     console.log("now the ray"); 
     console.log(ray);
 
-    // for (let i:number =0; i < f.Graph.length;i++){}
+     for (let i:number =0; i < cubaCars.length;i++){
+       const distance:f.Vector3 = ray.getDistance(cubaCars[i].mtxWorld.translation)
+       console.log(distance);
+       
+     }
 
   }
 
@@ -77,7 +82,7 @@ namespace Script {
       cubaInstance.getComponent(f.ComponentTransform).mtxLocal.translateZ(f.random.getRangeFloored(-15, 15))
       // console.log(cubaInstance)
       cuba.getParent().addChild(cubaInstance);
-      // cubaCars.push(cubaInstance)
+       cubaCars.push(cubaInstance)
     }
 
   }

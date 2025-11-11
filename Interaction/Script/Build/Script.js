@@ -66,7 +66,7 @@ var Script;
     f.Debug.info("Main Program Template running!");
     let viewport;
     let cuba;
-    // const cubaCars:f.Graph[] = [];
+    const cubaCars = []; // you can create instead an array out of the CUba graph and his childs
     // const cubox:f.GraphInstance = new f.GraphInstance(graphCuba);
     // cubaCars.push(cubox);
     // const cubert:f.GraphInstance = new f.GraphInstance(graphCuba);
@@ -77,6 +77,7 @@ var Script;
         // const graphCuba:f.Graph = f.Project.getResource("Graph|2025-11-10T09:20:52.686Z|17517")
         const graphCuba = f.Project.getResourcesByName("Cuba")[0];
         cuba = viewport.getBranch().getChildByName("Cuba");
+        cubaCars.push(cuba);
         await spawnCars(graphCuba);
         console.log(cuba);
         // cuba.getComponent(CubaControl).experiment();
@@ -102,7 +103,10 @@ var Script;
         const ray = viewport.getRayFromClient(vecScreen);
         console.log("now the ray");
         console.log(ray);
-        // for (let i:number =0; i < f.Graph.length;i++){}
+        for (let i = 0; i < cubaCars.length; i++) {
+            const distance = ray.getDistance(cubaCars[i].mtxWorld.translation);
+            console.log(distance);
+        }
     }
     async function spawnCars(_graph) {
         for (let i = 0; i < 10; i++) {
@@ -111,7 +115,7 @@ var Script;
             cubaInstance.getComponent(f.ComponentTransform).mtxLocal.translateZ(f.random.getRangeFloored(-15, 15));
             // console.log(cubaInstance)
             cuba.getParent().addChild(cubaInstance);
-            // cubaCars.push(cubaInstance)
+            cubaCars.push(cubaInstance);
         }
     }
 })(Script || (Script = {}));
