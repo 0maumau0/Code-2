@@ -59,6 +59,7 @@ var Script;
     // export let mouseX:number = 0;
     f.Debug.info("Main Program Template running!");
     let viewport;
+    let active;
     let cuba;
     const speed = 0.01;
     let speede = 0;
@@ -90,12 +91,12 @@ var Script;
             if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W])) {
                 speede += speed;
                 console.log(speede + "forward");
-                cuba.getComponent(Script.CubaControl).drive(speede);
+                active.getComponent(Script.CubaControl).drive(speede);
             }
             else {
                 speede -= speed;
                 console.log(speede + "backwards");
-                cuba.getComponent(Script.CubaControl).drive(speede);
+                active.getComponent(Script.CubaControl).drive(speede);
             }
         }
         else
@@ -120,6 +121,7 @@ var Script;
             console.log(distance);
             if (minDistance > distance && distance < maxDistance) {
                 console.log("car is hittet");
+                active = cubaCars[i];
             }
         }
     }

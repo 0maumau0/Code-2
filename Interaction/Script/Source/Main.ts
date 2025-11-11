@@ -5,6 +5,7 @@ namespace Script {
   f.Debug.info("Main Program Template running!");
 
   let viewport: f.Viewport;
+  let active :f.Node;
   let cuba: f.Node;
   const speed: number = 0.01
   let speede: number = 0
@@ -56,12 +57,12 @@ namespace Script {
         speede += speed
         console.log(speede+"forward");
         
-        cuba.getComponent(CubaControl).drive(speede);
+        active.getComponent(CubaControl).drive(speede);
         
       } else{
         speede -= speed
         console.log(speede +"backwards");        
-        cuba.getComponent(CubaControl).drive(speede);
+        active.getComponent(CubaControl).drive(speede);
       }
       
     } else speede = 0
@@ -90,9 +91,7 @@ namespace Script {
       console.log(distance);
       if (minDistance > distance && distance < maxDistance) {
         console.log("car is hittet");
-
-
-
+        active = cubaCars[i];
       }
 
     }
