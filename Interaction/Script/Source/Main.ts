@@ -1,54 +1,88 @@
 namespace Script {
   import f = FudgeCore;
-  export const leftclick:boolean = false;
+  export const leftclick: boolean = false;
   // export let mouseX:number = 0;
   f.Debug.info("Main Program Template running!");
 
   let viewport: f.Viewport;
-  let cuba:f.Node;
-  document.addEventListener("interactiveViewportStarted", <EventListener>start);
+  let cuba: f.Node; 
+  // const cubaCars:f.Graph[] = [];
+  
   
 
-  function start(_event: CustomEvent): void {
+  // const cubox:f.GraphInstance = new f.GraphInstance(graphCuba);
+  // cubaCars.push(cubox);
+  // const cubert:f.GraphInstance = new f.GraphInstance(graphCuba);
+  // cubaCars.push(cubert);
+
+  document.addEventListener("interactiveViewportStarted", <EventListener><unknown>start);
+
+
+  async function start(_event: CustomEvent): Promise<void> {
     viewport = _event.detail;
-
     
-  
+   
+    // const graphCuba:f.Graph = f.Project.getResource("Graph|2025-11-10T09:20:52.686Z|17517")
+    const graphCuba: f.Graph = <f.Graph>f.Project.getResourcesByName("Cuba")[0]
     
 
-    cuba =viewport.getBranch().getChildByName("Cuba")
+
+
+     cuba = viewport.getBranch().getChildByName("Cuba")
+     await spawnCars(graphCuba);
     console.log(cuba);
 
-      // cuba.getComponent(CubaControl).experiment();
-    
-    
+    // cuba.getComponent(CubaControl).experiment();
 
-    
 
-   document.addEventListener("mousemove",hndlMovement);
+
+
+    document.addEventListener("mousedown",hndlClick);
+    document.addEventListener("mousemove", hndlMovement);
     f.Loop.addEventListener(f.EVENT.LOOP_FRAME, update);
-     f.Loop.start();  // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
+    f.Loop.start();  // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
   }
 
   function update(_event: Event): void {
     // ƒ.Physics.simulate();  // if physics is included and used
     viewport.draw();
     f.AudioManager.default.update();
+    
   }
 
-  function hndlMovement(_event:MouseEvent):void{
-    let angle:number = _event.movementX
+  function hndlMovement(_event: MouseEvent): void {
+    const angle: number = _event.movementX
     cuba.getComponent(CubaControl).experiment(-angle);
 
     // mouseX = window.innerWidth/2 - _event.clientX;
     // mouseX = _event.movementX;
     // console.log(_event.movementX);
-    
-    
+  }
 
-  } 
+  function hndlClick(_event:MouseEvent):void {
+  const vecScreen: f.Vector2 = new f.Vector2(_event.offsetX,_event.offsetY)
+  const ray:f.Ray = viewport.getRayFromClient(vecScreen)
+    console.log("now the ray"); 
+    console.log(ray);
 
-  
+    // for (let i:number =0; i < f.Graph.length;i++){}
+
+  }
+
+  async function spawnCars(_graph: f.Graph): Promise<void> {
+
+    for (let i: number = 0; i < 10; i++) {
+      const cubaInstance: f.GraphInstance = await f.Project.createGraphInstance(_graph)
+      cubaInstance.getComponent(f.ComponentTransform).mtxLocal.translateX(f.random.getRangeFloored(-15, 15))
+      cubaInstance.getComponent(f.ComponentTransform).mtxLocal.translateZ(f.random.getRangeFloored(-15, 15))
+      // console.log(cubaInstance)
+      cuba.getParent().addChild(cubaInstance);
+      // cubaCars.push(cubaInstance)
+    }
+
+  }
+
+
 
 
 }

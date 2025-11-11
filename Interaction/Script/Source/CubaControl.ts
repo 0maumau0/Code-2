@@ -10,7 +10,7 @@ namespace Script {
     public rotateSpeed: number 
 
 
-    constructor() {
+    public constructor() {
       super();
 
       // Don't start when running in editor
@@ -43,11 +43,14 @@ namespace Script {
 
 
       if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W,f.KEYBOARD_CODE.S]) ==true){
+        let speed:number = 0.2
+        speed += speed ;
 
         if (f.KEYBOARD_CODE.A){
-          this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(-0.2)
+          
+          this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(speed)
         }else
-          this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(0.2)
+          this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(-speed)
 
 
       }
@@ -57,7 +60,7 @@ namespace Script {
     }
 
     public experiment  =(_angle:number):void =>{
-      console.log("Experiment is a success");
+      // console.log("Experiment is a success");
       
       this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle)
 

@@ -27,18 +27,20 @@ var Script;
             };
             this.update = () => {
                 if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W, f.KEYBOARD_CODE.S]) == true) {
+                    let speed = 0.2;
+                    speed += speed;
                     if (f.KEYBOARD_CODE.A) {
-                        this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(-0.2);
+                        this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(speed);
                     }
                     else
-                        this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(0.2);
+                        this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(-speed);
                 }
                 // let node:f.Node = this.node;
                 // let cmpTransform:f.ComponentTransform = node.getComponent(f.ComponentTransform);
                 // cmpTransform.mtxLocal.rotateY(mouseX /100);
             };
             this.experiment = (_angle) => {
-                console.log("Experiment is a success");
+                // console.log("Experiment is a success");
                 this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle);
             };
             // Don't start when running in editor
@@ -64,12 +66,21 @@ var Script;
     f.Debug.info("Main Program Template running!");
     let viewport;
     let cuba;
+    // const cubaCars:f.Graph[] = [];
+    // const cubox:f.GraphInstance = new f.GraphInstance(graphCuba);
+    // cubaCars.push(cubox);
+    // const cubert:f.GraphInstance = new f.GraphInstance(graphCuba);
+    // cubaCars.push(cubert);
     document.addEventListener("interactiveViewportStarted", start);
-    function start(_event) {
+    async function start(_event) {
         viewport = _event.detail;
+        // const graphCuba:f.Graph = f.Project.getResource("Graph|2025-11-10T09:20:52.686Z|17517")
+        const graphCuba = f.Project.getResourcesByName("Cuba")[0];
         cuba = viewport.getBranch().getChildByName("Cuba");
+        await spawnCars(graphCuba);
         console.log(cuba);
         // cuba.getComponent(CubaControl).experiment();
+        document.addEventListener("mousedown", hndlClick);
         document.addEventListener("mousemove", hndlMovement);
         f.Loop.addEventListener("loopFrame" /* f.EVENT.LOOP_FRAME */, update);
         f.Loop.start(); // start the game loop to continously draw the viewport, update the audiosystem and drive the physics i/a
@@ -80,11 +91,28 @@ var Script;
         f.AudioManager.default.update();
     }
     function hndlMovement(_event) {
-        let angle = _event.movementX;
+        const angle = _event.movementX;
         cuba.getComponent(Script.CubaControl).experiment(-angle);
         // mouseX = window.innerWidth/2 - _event.clientX;
         // mouseX = _event.movementX;
         // console.log(_event.movementX);
+    }
+    function hndlClick(_event) {
+        const vecScreen = new f.Vector2(_event.offsetX, _event.offsetY);
+        const ray = viewport.getRayFromClient(vecScreen);
+        console.log("now the ray");
+        console.log(ray);
+        // for (let i:number =0; i < f.Graph.length;i++){}
+    }
+    async function spawnCars(_graph) {
+        for (let i = 0; i < 10; i++) {
+            const cubaInstance = await f.Project.createGraphInstance(_graph);
+            cubaInstance.getComponent(f.ComponentTransform).mtxLocal.translateX(f.random.getRangeFloored(-15, 15));
+            cubaInstance.getComponent(f.ComponentTransform).mtxLocal.translateZ(f.random.getRangeFloored(-15, 15));
+            // console.log(cubaInstance)
+            cuba.getParent().addChild(cubaInstance);
+            // cubaCars.push(cubaInstance)
+        }
     }
 })(Script || (Script = {}));
 //# sourceMappingURL=Script.js.map
