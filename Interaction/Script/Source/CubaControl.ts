@@ -48,7 +48,7 @@ namespace Script {
     public experiment = (_angle: number): void => {
       // console.log("Experiment is a success");
 
-      // this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle)
+       this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle)
 
 
     }

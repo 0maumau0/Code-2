@@ -32,7 +32,7 @@ var Script;
             };
             this.experiment = (_angle) => {
                 // console.log("Experiment is a success");
-                // this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle)
+                this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle);
             };
             // Don't start when running in editor
             if (f.Project.mode == f.MODE.EDITOR)
@@ -59,8 +59,8 @@ var Script;
     // export let mouseX:number = 0;
     f.Debug.info("Main Program Template running!");
     let viewport;
-    let active;
     let cuba;
+    let activeCar = cuba;
     const speed = 0.01;
     let speede = 0;
     const cubaCars = []; // you can create instead an array out of the CUba graph and his childs
@@ -91,12 +91,12 @@ var Script;
             if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W])) {
                 speede += speed;
                 console.log(speede + "forward");
-                active.getComponent(Script.CubaControl).drive(speede);
+                activeCar.getComponent(Script.CubaControl).drive(speede);
             }
             else {
                 speede -= speed;
                 console.log(speede + "backwards");
-                active.getComponent(Script.CubaControl).drive(speede);
+                activeCar.getComponent(Script.CubaControl).drive(speede);
             }
         }
         else
@@ -104,7 +104,7 @@ var Script;
     }
     function hndlMovement(_event) {
         const angle = _event.movementX;
-        cuba.getComponent(Script.CubaControl).experiment(-angle);
+        activeCar.getComponent(Script.CubaControl).experiment(-angle);
         // mouseX = window.innerWidth/2 - _event.clientX;
         // mouseX = _event.movementX;
         // console.log(_event.movementX);
@@ -121,7 +121,7 @@ var Script;
             console.log(distance);
             if (minDistance > distance && distance < maxDistance) {
                 console.log("car is hittet");
-                active = cubaCars[i];
+                activeCar = cubaCars[i];
             }
         }
     }

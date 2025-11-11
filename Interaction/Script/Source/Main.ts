@@ -4,9 +4,9 @@ namespace Script {
   // export let mouseX:number = 0;
   f.Debug.info("Main Program Template running!");
 
-  let viewport: f.Viewport;
-  let active :f.Node;
+  let viewport: f.Viewport; 
   let cuba: f.Node;
+  let activeCar :f.Node = cuba;
   const speed: number = 0.01
   let speede: number = 0
   const cubaCars: f.Node[] = []; // you can create instead an array out of the CUba graph and his childs
@@ -57,12 +57,12 @@ namespace Script {
         speede += speed
         console.log(speede+"forward");
         
-        active.getComponent(CubaControl).drive(speede);
+        activeCar.getComponent(CubaControl).drive(speede);
         
       } else{
         speede -= speed
         console.log(speede +"backwards");        
-        active.getComponent(CubaControl).drive(speede);
+        activeCar.getComponent(CubaControl).drive(speede);
       }
       
     } else speede = 0
@@ -71,7 +71,7 @@ namespace Script {
 
   function hndlMovement(_event: MouseEvent): void {
     const angle: number = _event.movementX
-    cuba.getComponent(CubaControl).experiment(-angle);
+    activeCar.getComponent(CubaControl).experiment(-angle);
 
     // mouseX = window.innerWidth/2 - _event.clientX;
     // mouseX = _event.movementX;
@@ -91,7 +91,7 @@ namespace Script {
       console.log(distance);
       if (minDistance > distance && distance < maxDistance) {
         console.log("car is hittet");
-        active = cubaCars[i];
+        activeCar = cubaCars[i];
       }
 
     }
