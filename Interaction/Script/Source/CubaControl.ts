@@ -7,7 +7,7 @@ namespace Script {
     public static readonly iSubclass: number = f.Component.registerSubclass(CubaControl);
     // Properties may be mutated by users in the editor via the automatically created user interface
     public message: string = "CustomComponentScript added to ";
-    public rotateSpeed: number 
+    public rotateSpeed: number
 
 
     public constructor() {
@@ -27,7 +27,7 @@ namespace Script {
     public hndEvent = (_event: Event): void => {
       switch (_event.type) {
         case f.EVENT.COMPONENT_ADD:
-          f.Debug.log(this.message, this.node);
+          //f.Debug.log(this.message, this.node);
           break;
         case f.EVENT.COMPONENT_REMOVE:
           this.removeEventListener(f.EVENT.COMPONENT_ADD, this.hndEvent);
@@ -40,38 +40,29 @@ namespace Script {
     }
 
     public update = (): void => {
-
-
-      if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W,f.KEYBOARD_CODE.S]) ==true){
-        let speed:number = 0.2
-        speed += speed ;
-
-        if (f.KEYBOARD_CODE.A){
-          
-          this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(speed)
-        }else
-          this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(-speed)
-
-
-      }
       // let node:f.Node = this.node;
       // let cmpTransform:f.ComponentTransform = node.getComponent(f.ComponentTransform);
       // cmpTransform.mtxLocal.rotateY(mouseX /100);
     }
 
-    public experiment  =(_angle:number):void =>{
+    public experiment = (_angle: number): void => {
       // console.log("Experiment is a success");
-      
-      this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle)
+
+      // this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle)
 
 
     }
-    
 
-    
+    public drive(_speed:number):void{
+
+      this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(_speed)
+    }
+
+
+
   }
 
-  
+
 
 
 

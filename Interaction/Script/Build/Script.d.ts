@@ -8,6 +8,7 @@ declare namespace Script {
         hndEvent: (_event: Event) => void;
         update: () => void;
         experiment: (_angle: number) => void;
+        drive(_speed: number): void;
     }
 }
 declare namespace Script {

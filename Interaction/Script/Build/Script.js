@@ -14,7 +14,7 @@ var Script;
             this.hndEvent = (_event) => {
                 switch (_event.type) {
                     case "componentAdd" /* f.EVENT.COMPONENT_ADD */:
-                        f.Debug.log(this.message, this.node);
+                        //f.Debug.log(this.message, this.node);
                         break;
                     case "componentRemove" /* f.EVENT.COMPONENT_REMOVE */:
                         this.removeEventListener("componentAdd" /* f.EVENT.COMPONENT_ADD */, this.hndEvent);
@@ -26,22 +26,13 @@ var Script;
                 }
             };
             this.update = () => {
-                if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W, f.KEYBOARD_CODE.S]) == true) {
-                    let speed = 0.2;
-                    speed += speed;
-                    if (f.KEYBOARD_CODE.A) {
-                        this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(speed);
-                    }
-                    else
-                        this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(-speed);
-                }
                 // let node:f.Node = this.node;
                 // let cmpTransform:f.ComponentTransform = node.getComponent(f.ComponentTransform);
                 // cmpTransform.mtxLocal.rotateY(mouseX /100);
             };
             this.experiment = (_angle) => {
                 // console.log("Experiment is a success");
-                this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle);
+                // this.node.getComponent(f.ComponentTransform).mtxLocal.rotateY(_angle)
             };
             // Don't start when running in editor
             if (f.Project.mode == f.MODE.EDITOR)
@@ -50,6 +41,9 @@ var Script;
             this.addEventListener("componentAdd" /* f.EVENT.COMPONENT_ADD */, this.hndEvent);
             this.addEventListener("componentRemove" /* f.EVENT.COMPONENT_REMOVE */, this.hndEvent);
             this.addEventListener("nodeDeserialized" /* f.EVENT.NODE_DESERIALIZED */, this.hndEvent);
+        }
+        drive(_speed) {
+            this.node.getComponent(f.ComponentTransform).mtxLocal.translateZ(_speed);
         }
     }
     Script.CubaControl = CubaControl;
@@ -66,6 +60,8 @@ var Script;
     f.Debug.info("Main Program Template running!");
     let viewport;
     let cuba;
+    const speed = 0.01;
+    let speede = 0;
     const cubaCars = []; // you can create instead an array out of the CUba graph and his childs
     // const cubox:f.GraphInstance = new f.GraphInstance(graphCuba);
     // cubaCars.push(cubox);
@@ -90,6 +86,20 @@ var Script;
         // ƒ.Physics.simulate();  // if physics is included and used
         viewport.draw();
         f.AudioManager.default.update();
+        if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W, f.KEYBOARD_CODE.S]) == true) {
+            if (f.Keyboard.isPressedOne([f.KEYBOARD_CODE.W])) {
+                speede += speed;
+                console.log(speede + "forward");
+                cuba.getComponent(Script.CubaControl).drive(speede);
+            }
+            else {
+                speede -= speed;
+                console.log(speede + "backwards");
+                cuba.getComponent(Script.CubaControl).drive(speede);
+            }
+        }
+        else
+            speede = 0;
     }
     function hndlMovement(_event) {
         const angle = _event.movementX;
@@ -105,7 +115,12 @@ var Script;
         console.log(ray);
         for (let i = 0; i < cubaCars.length; i++) {
             const distance = ray.getDistance(cubaCars[i].mtxWorld.translation);
+            const minDistance = new f.Vector3(-0.5, -0.5, -0.5);
+            const maxDistance = new f.Vector3(0.5, 0.5, 0.5);
             console.log(distance);
+            if (minDistance > distance && distance < maxDistance) {
+                console.log("car is hittet");
+            }
         }
     }
     async function spawnCars(_graph) {
