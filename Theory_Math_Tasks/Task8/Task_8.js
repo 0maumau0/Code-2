@@ -2,15 +2,24 @@
 var GuardiansGate;
 (function (GuardiansGate) {
     const maxTry = Number(prompt("max Trys ?"));
-    const minSuccesses = Number(prompt("How much success did you need"));
-    const successChance = Number(prompt("Successchance of each try"));
+    const successcount = Number(prompt("How much success did you need"));
+    const successChance = Number(prompt("Successchance of each try")) / 100;
+    let overAllChance = 0;
     checkValid();
     console.log(maxTry);
-    console.log(minSuccesses);
+    console.log(successcount);
+    calculateOverallChance();
     function checkValid() {
-        if (maxTry < 0 || minSuccesses > maxTry || successChance > 100) {
+        if (maxTry < 0 || successcount > maxTry || successChance > 100) {
             alert("no Valid numbers");
             window.location.reload();
+        }
+        ;
+    }
+    ;
+    function calculateOverallChance() {
+        for (let i = successcount; i >= maxTry; i++) {
+            overAllChance = overAllChance + Math.pow(successChance, successcount) * (Math.pow(1 - successChance, maxTry - successcount));
         }
         ;
     }
